@@ -116,9 +116,9 @@ iconAngle=iconAngle*(Math.PI/180);
   var activitySetIconX = (0 + (Math.cos(iconAngle)) * (235));
   console.log(activitySetIconX);
   var activitySetIconY = (0 + (Math.sin(iconAngle)) * (235));
-  //activityIcon.transform = "translateX(" + activitySetIconX + "px) translateY(" + activitySetIconY + "px)";
-   activityIcon.left = activitySetIconX + "px";
- activityIcon.top = activitySetIconY + "px";
+  activityIcon.transform = "translateX(" + activitySetIconX + "px) translateY(" + activitySetIconY + "px)";
+  // activityIcon.left = activitySetIconX + "px";
+ //activityIcon.top = activitySetIconY + "px";
   activityIcon.visibility = "visible";
 
      //activityIcon.setAttribute('data-x', activitySetIconX);
@@ -348,9 +348,9 @@ var allActivities= document.getElementById(activities).style;
   // var allActivitiesType= document.getElementById(activitiesDiv).style;
  //allActivities.transform = "translateY(" + activityIconY + "px) rotate(" + activityIconX2 + "deg)";
  //allActivitiesType.transform = "rotate(" + activityIconX + "deg)";
- //allActivities.transform = "translateX(" + activityIconX + "px) translateY(" + activityIconY + "px)";
- allActivities.left = activityIconX + "px";
- allActivities.top = activityIconY + "px";
+ allActivities.transform = "translateX(" + activityIconX + "px) translateY(" + activityIconY + "px)";
+ //allActivities.left = activityIconX + "px";
+ //allActivities.top = activityIconY + "px";
 
  //activityIcon.transform = "rotate(" + activityIconX2 + "deg)";
  allActivities.visibility = activitiesState;
@@ -478,7 +478,7 @@ interact('.pizzaIcon')
 
 
 
-$( document ).ready(function() {
+
 // get a reference to an element
 var stage = document.getElementById('stage');
 $stage = jQuery(stage);
@@ -593,7 +593,7 @@ manager.on('doubletap', function() {
   isShrunken = !isShrunken;
 });
 
-});
+
 
 
 
