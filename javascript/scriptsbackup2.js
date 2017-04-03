@@ -52,14 +52,8 @@ var activityIconXN = 0;
       var dY4=0;
        var dX5=0;
       var dY5=0;
-     var moveInt=false;
+     
 var addStatePlus= false;
-var hypo=0;
-var activityType=0;
-var dAngle=0;
-var hypoMin=235;
-var workState=false;
-var hypoMax=250;
 //connect TU/e OOCSI server
 OOCSI.connect("ws://oocsi.id.tue.nl");
 
@@ -119,57 +113,6 @@ function setCookie(name, value) {
   var cookieName = name + timeAsId();
   Cookies.set(cookieName, value, { expires: 1 }); //cookie expires in 1 day
 }
-/*
-
-function allowDrop(ev)
-{
-  ev.preventDefault();
-}
-
-function drag(ev)
-{
-  ev.dataTransfer.setData("content",ev.target.id);
-}
-
-function drop(ev)
-{
-  ev.preventDefault();
-  var image =ev.dataTransfer.getData("content");
-  ev.target.appendChild(document.getElementById(image));
-console.log(ev.dataTransfer);
-  if (ev.dataTransfer.getData('content') == "pizzaIcon" || "coffeeIcon" || "dinnerIcon" || "sportIcon" || "workIcon"){ 
-      var img = document.createElement("img");
-  var clockDiv = document.getElementById("clock");
-  clockDiv.appendChild(img);
-
-  var iconID = name + "Icon";
-
-  //get icon bassed on activity name
-  //var activityDiv = document.getElementById(name).style;
-  var activityIcon = document.getElementById(iconID).style;
-
-  console.log("deg");
-console.log(hours* 30 + minutes * 0.5);
-
-//var iconAngle=(hours * 30 + minutes * 0.5)-90;
-
-
-
-//iconAngle=iconAngle*(Math.PI/180);
-  //rotates div containing icon to the correct time, then counter rotates icon
-  //var activitySetIconX = (0 + (Math.cos(iconAngle)) * (235));
-  //console.log(activitySetIconX);
-  //var activitySetIconY = (0 + (Math.sin(iconAngle)) * (235));
-  activityIcon.transform = "translateX(" + 0 + "px) translateY(" + 0 + "px)";
-  // activityIcon.left = activitySetIconX + "px";
- //activityIcon.top = activitySetIconY + "px";
-  activityIcon.visibility = "visible";
-      }
-  else{
-     alert("wrong");
-  }
-}
-*/
 
 //display activity on clock from oocsi input
 function displayActivity(name, hours, minutes) {
@@ -263,21 +206,12 @@ var activitiesDiv;
 var activitiesState;
 
 function randomXandY() {
-   activityRandDeg = Math.floor((Math.random() * 360) + 0);
+activityRandDeg = Math.floor((Math.random() * 360) + 0);
    activityRandR = Math.floor((Math.random() * 80) + 80);
    activityRandDeg=activityRandDeg*(Math.PI/180);
    activityIconX = (0 + (Math.cos(activityRandDeg) * (activityRandR)));
    activityIconY = (0 + (Math.sin(activityRandDeg) * (activityRandR)));
   
-}
-
-function randomXandYR(){
-activityRandDeg = Math.min(Math.max(activityRandDeg, 0), 360);
-   activityRandR = 250;
-   activityRandDeg=activityRandDeg*(Math.PI/180);
-   activityIconX = (0 + (Math.cos(activityRandDeg) * (activityRandR)));
-   activityIconY = (0 + (Math.sin(activityRandDeg) * (activityRandR)));
-
 }
 
 function displayActivityOptions(activities, activitiesDiv, activitiesState){
@@ -520,11 +454,10 @@ function addClicked(){
 
   if (addStatePlus == false){
     addStateInt=true;
-    if (workState==false){
            activitiesState = "hidden";
      activities = "workIcon";
      activitiesDiv = "work";
-}
+
 
     displayActivityOptions(activities, activitiesDiv, activitiesState);
 
@@ -554,7 +487,7 @@ function addClicked(){
 
 }
 }
-/*
+
 $( document ).ready(function() {
 interact('.pizzaIcon')
   .draggable({
@@ -600,14 +533,13 @@ interact('.pizzaIcon')
       window.dragMoveListener = dragMoveListener;
 
   });
-*/
+
 
 
 
 // get a reference to an element
 // get a reference to an element
-
-$( document ).ready(function() {
+window.onload = function () {
 var stage1 = document.getElementById('pizzaIcon');
 $stage1 = jQuery(stage1);
 
@@ -644,85 +576,14 @@ manager1.add(Tap1);
 
 manager1.on('panmove', function(e) {
   // do something cool
-dX1 = deltaX3 + (e.deltaX);
-   dY1 = deltaY3 + (e.deltaY);
-    //dAngle=Math.atan(dY5/dX5)+90;
-  $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
-  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
- hypo= (Math.pow(dX1, 2))+(Math.pow(dY1, 2));
- hypo2= (Math.cos(dAngle)/(hypo));
- hypo3= (Math.sin(dAngle)/(hypo));
- console.log("hypo squared" + hypo)
- hypo= Math.sqrt(hypo);
- console.log(hypo);
- console.log("Test"+"dX1="+ dX1 + "       dY1" +dY1);
-/*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
    dX1 = deltaX3 + (e.deltaX);
    dY1 = deltaY3 + (e.deltaY);
   $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
   $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
-  console.log("ONE"+"dX1="+ dX1 + "       dY1" +dY1);
-  console.log("less");
-}
-*/
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-  /*if (hypo<=hypoMax && hypo>=hypoMin){
-
-
-
-    moveInt=true;
-       dX1 = deltaX3 + (e.deltaX);
-   dY1 = deltaY3 + (e.deltaY);
-
-   
-  $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
-  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
-  console.log("more");
-
-    
-
-  
-}*/
-
 });
 manager1.on('panend', function(e) {
-      if (hypo<=hypoMax && hypo>=hypoMin){
-
- 
-    $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
-  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
-  var adjustAngle=0;
-
-  if (deltaX3>0 && deltaY3<0){
-    adjustAngle=Math.PI/2;
-  }
-  if (deltaX3<0 && deltaY3<0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX3<0 && deltaY3>0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX3>0 && deltaY3>0){
-    adjustAngle=Math.PI/2;
-  }
-
-
-
-  console.log("deltaX3   " + deltaX3 + "  deltaY3   " + deltaY3)
-      dAngle=(Math.atan(deltaY3/deltaX3))+adjustAngle;
-      dAngle=dAngle*180/Math.PI;
-      if (dAngle<0){
-
-      dAngle=dAngle+360;
-      }
-  console.log(dAngle);
-
-    buttonCreate("pizza:B");
-}
- deltaX3 = deltaX3 + e.deltaX;
+  deltaX3 = deltaX3 + e.deltaX;
   deltaY3 = deltaY3 + e.deltaY;
-      $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
-  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
 });
 
 
@@ -802,89 +663,14 @@ manager2.add(Tap2);
 
 manager2.on('panmove', function(e) {
   // do something cool
-dX2 = deltaX2 + (e.deltaX);
-   dY2 = deltaY2 + (e.deltaY);
-    //dAngle=Math.atan(dY5/dX5)+90;
- $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
-  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
- hypo= (Math.pow(dX2, 2))+(Math.pow(dY2, 2));
- hypo2= (Math.cos(dAngle)/(hypo));
- hypo3= (Math.sin(dAngle)/(hypo));
- console.log("hypo squared" + hypo)
- hypo= Math.sqrt(hypo);
- console.log(hypo);
- console.log("Test"+"dX2="+ dX2 + "       dY2" +dY2);
-/*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
    dX2 = deltaX2 + (e.deltaX);
    dY2 = deltaY2 + (e.deltaY);
   $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
   $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
-  console.log("ONE"+"dX2="+ dX2 + "       dY2" +dY2);
-  console.log("less");
-}
-*/
-/*if (hypo<=hypoMax && hypo>=hypoMin){
-
-
-
-    moveInt=true;
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-
-
-
-       dX2 = deltaX2 + (e.deltaX);
-   dY2 = deltaY2 + (e.deltaY);
-
-   
-  $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
-  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
-  console.log("more");
-
-    
-}*/
-  
-
-
 });
 manager2.on('panend', function(e) {
-  if (hypo<=hypoMax && hypo>=hypoMin){
-
-  
-   $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
-  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
-  var adjustAngle=0;
-
-  if (deltaX2>0 && deltaY2<0){
-    adjustAngle=Math.PI/2;
-  }
-  if (deltaX2<0 && deltaY2<0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX2<0 && deltaY2>0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX2>0 && deltaY2>0){
-    adjustAngle=Math.PI/2;
-  }
-
-
-
-  console.log("deltaX2   " + deltaX2 + "  deltaY2   " + deltaY2)
-      dAngle=(Math.atan(deltaY2/deltaX2))+adjustAngle;
-      dAngle=dAngle*180/Math.PI;
-      if (dAngle<0){
-
-      dAngle=dAngle+360;
-      }
-  console.log(dAngle);
-
-    buttonCreate("coffee:B");
-}
-deltaX2 = deltaX2 + e.deltaX;
+  deltaX2 = deltaX2 + e.deltaX;
   deltaY2 = deltaY2 + e.deltaY;
-     $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
-  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
-
 });
 
 
@@ -965,84 +751,53 @@ manager3.add(Tap3);
 
 manager3.on('panmove', function(e) {
   // do something cool
-dX3 = deltaX1 + (e.deltaX);
-   dY3 = deltaY1+ (e.deltaY);
-    //dAngle=Math.atan(dY5/dX5)+90;
- $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
-  $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
- hypo= (Math.pow(dX3, 2))+(Math.pow(dY3, 2));
- hypo2= (Math.cos(dAngle)/(hypo));
- hypo3= (Math.sin(dAngle)/(hypo));
- console.log("hypo squared" + hypo)
- hypo= Math.sqrt(hypo);
- console.log(hypo);
- console.log("Test"+"dX3="+ dX3 + "       dY3" +dY3);
-/*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
    dX3 = deltaX1 + (e.deltaX);
    dY3 = deltaY1 + (e.deltaY);
   $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
   $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
-  console.log("ONE"+"dX3="+ dX3 + "       dY3" +dY3);
-  console.log("less");
-}*/
-
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-  /*if (hypo<=hypoMax && hypo>=hypoMin){
-
-
-
-    moveInt=true;
-       dX3 = deltaX1 + (e.deltaX);
-   dY3 = deltaY1 + (e.deltaY);
-
-   
-  $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
-  $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
-  console.log("more");
-
-    
-
-  
-}
-*/
 });
 manager3.on('panend', function(e) {
-    if (hypo<=hypoMax && hypo>=hypoMin){
-$.Velocity.hook($stage3, 'translateX', dX3 + 'px');
-  $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
-  var adjustAngle=0;
-
-  if (deltaX1>0 && deltaY1<0){
-    adjustAngle=Math.PI/2;
-  }
-  if (deltaX1<0 && deltaY1<0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX1<0 && deltaY1>0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX1>0 && deltaY1>0){
-    adjustAngle=Math.PI/2;
-  }
-
-
-
-  console.log("deltaX1   " + deltaX1 + "  deltaY1   " + deltaY1)
-      dAngle=(Math.atan(deltaY1/deltaX1))+adjustAngle;
-      dAngle=dAngle*180/Math.PI;
-      if (dAngle<0){
-
-      dAngle=dAngle+360;
-      }
-  console.log(dAngle);
-
-    buttonCreate("work:A");
-}
   deltaX1 = deltaX1 + e.deltaX;
   deltaY1 = deltaY1 + e.deltaY;
-  $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
-  $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
+});
 
+
+
+var colors = [
+  [20, 187, 95],
+  [20, 95, 187],
+  [187, 95, 20],
+  [187, 20, 95],
+  [95, 20, 187],
+  [95, 187, 20]
+];
+function mult(a, b) {
+  return Math.round(a * b);
+}
+function makeColor(rgb, adj) {
+  adj = adj || 1;
+  return 'rgb('+mult(rgb[0], adj)+','+mult(rgb[1], adj)+','+ mult(rgb[2], adj)+')';
+}
+var currentColorIndex = 0;
+manager3.on('tap', function(e) {
+  currentColorIndex++;
+  if (currentColorIndex >= colors.length) {
+    currentColorIndex = 0;
+  }
+  stage3.style.backgroundColor = makeColor(colors[currentColorIndex]);
+  stage3.style.borderColor = makeColor(colors[currentColorIndex], 0.85);
+});
+
+var isShrunken = false;
+manager3.on('doubletap', function() {
+  console.log('doubletapped');
+  var scale = $.Velocity.hook($stage3, 'scale');
+  if (isShrunken) {
+    $.Velocity.hook($stage3, 'scale', 2 * scale);
+  } else {
+    $.Velocity.hook($stage3, 'scale', .5 * scale);
+  }
+  isShrunken = !isShrunken;
 });
 
 //4
@@ -1084,84 +839,14 @@ manager4.add(Tap4);
 
 manager4.on('panmove', function(e) {
   // do something cool
-dX4 = deltaX4 + (e.deltaX);
-   dY4 = deltaY4 + (e.deltaY);
-    //dAngle=Math.atan(dY5/dX5)+90;
-$.Velocity.hook($stage4, 'translateX', dX4 + 'px');
-  $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
- hypo= (Math.pow(dX4, 2))+(Math.pow(dY4, 2));
- hypo2= (Math.cos(dAngle)/(hypo));
- hypo3= (Math.sin(dAngle)/(hypo));
- console.log("hypo squared" + hypo)
- hypo= Math.sqrt(hypo);
- console.log(hypo);
- console.log("Test"+"dX4="+ dX4 + "       dY4" +dY4);
-/*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
    dX4 = deltaX4 + (e.deltaX);
    dY4 = deltaY4 + (e.deltaY);
   $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
   $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
-  console.log("ONE"+"dX4="+ dX4 + "       dY4" +dY4);
-  console.log("less");
-}
-*/
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-  /*if (hypo<=hypoMax && hypo>=hypoMin){
-
-
-
-    moveInt=true;
-       dX4 = deltaX4 + (e.deltaX);
-   dY4 = deltaY4 + (e.deltaY);
-
-   
-  $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
-  $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
-  console.log("more");
-
-    
-
-  
-}*/
-
 });
 manager4.on('panend', function(e) {
-    if (hypo<=hypoMax && hypo>=hypoMin){
-    workState=true;
-  $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
-  $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
-  var adjustAngle=0;
-
-  if (deltaX4>0 && deltaY4<0){
-    adjustAngle=Math.PI/2;
-  }
-  if (deltaX4<0 && deltaY4<0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX4<0 && deltaY4>0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX4>0 && deltaY4>0){
-    adjustAngle=Math.PI/2;
-  }
-
-
-
-  console.log("deltaX4   " + deltaX4 + "  deltaY4   " + deltaY4)
-      dAngle=(Math.atan(deltaY4/deltaX4))+adjustAngle;
-      dAngle=dAngle*180/Math.PI;
-      if (dAngle<0){
-
-      dAngle=dAngle+360;
-      }
-  console.log(dAngle);
-
-    buttonCreate("dinner:B");
-}
- deltaX4 = deltaX4 + e.deltaX;
+  deltaX4 = deltaX4 + e.deltaX;
   deltaY4 = deltaY4 + e.deltaY;
-$.Velocity.hook($stage4, 'translateX', dX4 + 'px');
-  $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
 });
 
 
@@ -1244,88 +929,14 @@ manager5.add(Tap5);
 
 manager5.on('panmove', function(e) {
   // do something cool
-dX5 = deltaX5 + (e.deltaX);
-   dY5 = deltaY5 + (e.deltaY);
-    //dAngle=Math.atan(dY5/dX5)+90;
-  $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
-  $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
- hypo= (Math.pow(dX5, 2))+(Math.pow(dY5, 2));
- hypo2= (Math.cos(dAngle)/(hypo));
- hypo3= (Math.sin(dAngle)/(hypo));
- console.log("hypo squared" + hypo)
- hypo= Math.sqrt(hypo);
- console.log(hypo);
- console.log("Test"+"dX5="+ dX5 + "       dY5" +dY5);
-/*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
    dX5 = deltaX5 + (e.deltaX);
    dY5 = deltaY5 + (e.deltaY);
   $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
   $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
-  console.log("ONE"+"dX5="+ dX5 + "       dY5" +dY5);
-  console.log("less");
-}*/
-
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-  /*if (hypo<=hypoMax && hypo>=hypoMin){
-
-
-
-    moveInt=true;
-       dX5 = deltaX5 + (e.deltaX);
-   dY5 = deltaY5 + (e.deltaY);
-
-   
-  $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
-  $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
-  console.log("more");
-
-    
-
-  
-}*/
-
 });
 manager5.on('panend', function(e) {
-      if (hypo<=hypoMax && hypo>=hypoMin){
-
-
-    $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
-  $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
-  var adjustAngle=0;
-   hypo= (Math.pow(dX5, 2))+(Math.pow(dY5, 2));
-
-  if (hypo<=hypoMax && hypo>=hypoMin){
-
-  if (deltaX5>0 && deltaY5<0){
-    adjustAngle=Math.PI/2;
-  }
-  if (deltaX5<0 && deltaY5<0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX5<0 && deltaY5>0){
-    adjustAngle=-Math.PI/2;
-  }
-  if (deltaX5>0 && deltaY5>0){
-    adjustAngle=Math.PI/2;
-  }
-}
-
-
-  console.log("deltaX5   " + deltaX5 + "  deltaY5   " + deltaY5)
-      dAngle=(Math.atan(deltaY5/deltaX5))+adjustAngle;
-      dAngle=dAngle*180/Math.PI;
-      if (dAngle<0){
-
-      dAngle=dAngle+360;
-      }
-  console.log(dAngle);
-
-    buttonCreate("sport:C");
-}
   deltaX5 = deltaX5 + e.deltaX;
   deltaY5 = deltaY5 + e.deltaY;
-      $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
-  $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
 });
 
 
@@ -1355,7 +966,6 @@ manager5.on('tap', function(e) {
   stage5.style.borderColor = makeColor(colors[currentColorIndex], 0.85);
 });
 
-
 var isShrunken = false;
 manager5.on('doubletap', function() {
   console.log('doubletapped');
@@ -1367,41 +977,11 @@ manager5.on('doubletap', function() {
   }
   isShrunken = !isShrunken;
 });
+}
 
-});
-/*
-
-var allActivities= document.getElementById("pizzaIcon").style;
-   // 
-  // var allActivitiesType= document.getElementById(activitiesDiv).style;
- //allActivities.transform = "translateY(" + activityIconY + "px) rotate(" + activityIconX2 + "deg)";
- //allActivitiesType.transform = "rotate(" + activityIconX + "deg)";
- parseInt(allActivities.transform) = "translateX(" + activityIconX + "px) translateY(" + activityIconY + "px)";
-
-manager3.on('panmove', function(e) {
-  // do something cool
-   dX3 = deltaX1 + (e.deltaX);
-   dY3 = deltaY1 + (e.deltaY);
-  $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
-  $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
-});
-manager3.on('panend', function(e) {
-  deltaX1 = deltaX1 + e.deltaX;
-  deltaY1 = deltaY1 + e.deltaY;
-});
-
-function ContentDown(d)
-      {
-var allActivities= document.getElementById(activities).style;
-      var currentPosition = parseInt(obj.top)
-      var amountToMove = 30
-
-      obj.style.top = currentPosition+amountToMove+"pt";
-      }
-*/
 
 //when Create Activity button is clicked
-/*function buttonCreate() {
+function buttonCreate() {
   //get input from dropdown menu
   var nameTemp = document.getElementById('actPicker').value;
   //get input from textbox
@@ -1421,35 +1001,6 @@ var allActivities= document.getElementById(activities).style;
     window.alert("Another activity is already planned around this time!");
   }
 }
-*/
-
-function buttonCreate(activityType){
-console.log("buttonCreated");
-
-var nameTemp = (activityType);
-  //get input from textbox
-    var name = nameTemp.split(":");
-
-  var timeTemp = (dAngle/360)*12;
-  console.log("timeTemp" +timeTemp);
-  var timeM = ((timeTemp) % 1);
-  console.log("timeM   " + timeM);
-  timeM= timeM*60;
-  console.log("timeM   " + timeM);
-var timeH = Math.floor(timeTemp);;
-  if (checkOverlap(timeH, timeM)){
-    
-    displayActivity(name[0], timeH, timeM);
-    var joinedValues = joinVariables(name[0], timeH, timeM, name[1]);
-    setCookie(name, joinedValues);
-    sendActivity(name[0], timeH, timeM);
-  }
-  else {
-    window.alert("Another activity is already planned around this time!");
-  }
-  console.log(joinedValues);
-}
-
 
 function buttonReschedule() {
   //get input from dropdown menu
