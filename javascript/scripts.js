@@ -641,20 +641,25 @@ manager1.add(Pan1);
 manager1.add(DoubleTap1);
 manager1.add(Tap1);
 
-
-
-
-
 manager1.on('panmove', function(e) {
   // do something cool
 dX1 = deltaX3 + (e.deltaX);
    dY1 = deltaY3 + (e.deltaY);
     hypo= (Math.pow(dX1, 2))+(Math.pow(dY1, 2));
-
-     if (hypo<=hypoMax ){
-      console.log("ConditionHypoMaxMet");
+     hypo= Math.sqrt(hypo);
+console.log("hypo0:" + hypo);
     //dAngle=Math.atan(dY5/dX5)+90;
-  $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
+
+      if (hypo<=hypoMin || activitySet==true && moveInt==false ){
+      console.log("if hypo less");
+        //dX1 = deltaX3 + (e.deltaX);
+   //dY1 = deltaY3 + (e.deltaY);
+    //hypo= (Math.pow(dX1, 2))+(Math.pow(dY1, 2));
+     hypo= Math.sqrt(hypo);
+
+  console.log("hypo3:" + hypo);
+  
+$.Velocity.hook($stage1, 'translateX', dX1 + 'px');
   $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
  hypo= (Math.pow(dX1, 2))+(Math.pow(dY1, 2));
  hypo2= (Math.cos(dAngle)/(hypo));
@@ -664,23 +669,50 @@ dX1 = deltaX3 + (e.deltaX);
  console.log(hypo);
  console.log("Test"+"dX1="+ dX1 + "       dY1" +dY1);
 /*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
-   dX1 = deltaX3 + (e.deltaX);
-   dY1 = deltaY3 + (e.deltaY);
-  $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
-  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
-  console.log("ONE"+"dX1="+ dX1 + "       dY1" +dY1);
+   dX4 = deltaX4 + (e.deltaX);
+   dY4 = deltaY4 + (e.deltaY);
+  $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
+  $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
+  console.log("ONE"+"dX4="+ dX4 + "       dY4" +dY4);
   console.log("less");
 }
 */
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-  /*if (hypo<=hypoMax && hypo>=hypoMin){
+}
+  //console.log(hypo+"   "+hypo2+"   " +hypo3)
+
+  if (hypo>hypoMin){
+
+  var adjustAngle=0;
+ if (dX1>0 && dY1<0){
+    adjustAngle=Math.PI/2;
+  }
+  if (dX1<0 && dY1<0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX1<0 && dY1>0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX1>0 && dY1>0){
+    adjustAngle=Math.PI/2;
+  }
 
 
 
+  console.log("deltaX1   " + deltaX3 + "  deltaY1   " + deltaY3)
+      dAngle=(Math.atan(dY1/dX1))+adjustAngle;
+      //dAngle=dAngle*180/Math.PI;
+      if (dAngle<0){
+          console.log(dAngle);
+      dAngle=dAngle+2*Math.PI;
+      }
+
+      dAngle=dAngle-Math.PI/2;
+      //dAngle=dAngle*180/Math.PI;
+
+   activitySet=true;
     moveInt=true;
-       dX1 = deltaX3 + (e.deltaX);
-   dY1 = deltaY3 + (e.deltaY);
-
+       dX1 =  Math.cos(dAngle)*235;;
+   dY1 = Math.sin(dAngle)*235;
    
   $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
   $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
@@ -689,47 +721,52 @@ dX1 = deltaX3 + (e.deltaX);
     
 
   
-}*/
+
 }
 });
 manager1.on('panend', function(e) {
-      if (hypo<=hypoMax && hypo>=hypoMin){
+    moveInt=false;
 
- 
-    $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
+    if (hypo>hypoMin){
+      // dX4 = deltaX4 + e.deltaX;
+ // dY4 = deltaY4 + e.deltaY;
+ activitySet=true;
+  $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
   $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
   var adjustAngle=0;
+      hypo= (Math.pow(dX1, 2))+(Math.pow(dY1, 2));
 
-  if (deltaX3>0 && deltaY3<0){
+
+  if (dX1>0 && dY1<0){
     adjustAngle=Math.PI/2;
   }
-  if (deltaX3<0 && deltaY3<0){
+  if (dX1<0 && dY1<0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX3<0 && deltaY3>0){
+  if (dX1<0 && dY1>0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX3>0 && deltaY3>0){
+  if (dX1>0 && dY1>0){
     adjustAngle=Math.PI/2;
   }
 
 
 
-  console.log("deltaX3   " + deltaX3 + "  deltaY3   " + deltaY3)
-      dAngle=(Math.atan(deltaY3/deltaX3))+adjustAngle;
+  console.log("deltaX1   " + deltaX3 + "  deltaY1   " + deltaY3)
+      dAngle=(Math.atan(dY1/dX1))+adjustAngle;
       dAngle=dAngle*180/Math.PI;
       if (dAngle<0){
-
+          console.log(dAngle);
       dAngle=dAngle+360;
       }
-  console.log(dAngle);
+  console.log("Angle:" + dAngle);
 
     buttonCreate("pizza:B");
 }
- /*deltaX3 = deltaX3 + e.deltaX;
+ deltaX3= deltaX3 + e.deltaX;
   deltaY3 = deltaY3 + e.deltaY;
-      $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
-  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');*/
+$.Velocity.hook($stage1, 'translateX', dX1 + 'px');
+  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
 });
 
 
@@ -811,8 +848,21 @@ manager2.on('panmove', function(e) {
   // do something cool
 dX2 = deltaX2 + (e.deltaX);
    dY2 = deltaY2 + (e.deltaY);
+    hypo= (Math.pow(dX2, 2))+(Math.pow(dY2, 2));
+     hypo= Math.sqrt(hypo);
+console.log("hypo0:" + hypo);
     //dAngle=Math.atan(dY5/dX5)+90;
- $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
+
+      if (hypo<=hypoMin || activitySet==true && moveInt==false ){
+      console.log("if hypo less");
+        //dX4 = deltaX4 + (e.deltaX);
+   //dY4 = deltaY4 + (e.deltaY);
+    //hypo= (Math.pow(dX4, 2))+(Math.pow(dY4, 2));
+     hypo= Math.sqrt(hypo);
+
+  console.log("hypo3:" + hypo);
+  
+$.Velocity.hook($stage2, 'translateX', dX2 + 'px');
   $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
  hypo= (Math.pow(dX2, 2))+(Math.pow(dY2, 2));
  hypo2= (Math.cos(dAngle)/(hypo));
@@ -820,78 +870,106 @@ dX2 = deltaX2 + (e.deltaX);
  console.log("hypo squared" + hypo)
  hypo= Math.sqrt(hypo);
  console.log(hypo);
- console.log("Test"+"dX2="+ dX2 + "       dY2" +dY2);
+ console.log("Test"+"dX4="+ dX2 + "       dY4" +dY2);
 /*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
-   dX2 = deltaX2 + (e.deltaX);
-   dY2 = deltaY2 + (e.deltaY);
-  $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
-  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
-  console.log("ONE"+"dX2="+ dX2 + "       dY2" +dY2);
+   dX4 = deltaX4 + (e.deltaX);
+   dY4 = deltaY4 + (e.deltaY);
+  $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
+  $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
+  console.log("ONE"+"dX4="+ dX4 + "       dY4" +dY4);
   console.log("less");
 }
 */
-/*if (hypo<=hypoMax && hypo>=hypoMin){
+}
+  //console.log(hypo+"   "+hypo2+"   " +hypo3)
 
+  if (hypo>hypoMin){
 
-
-    moveInt=true;
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-
-
-
-       dX2 = deltaX2 + (e.deltaX);
-   dY2 = deltaY2 + (e.deltaY);
-
-   
-  $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
-  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
-  console.log("more");
-
-    
-}*/
-  
-
-
-});
-manager2.on('panend', function(e) {
-  if (hypo<=hypoMax && hypo>=hypoMin){
-
-  
-   $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
-  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
   var adjustAngle=0;
-
-  if (deltaX2>0 && deltaY2<0){
+ if (dX2>0 && dY2<0){
     adjustAngle=Math.PI/2;
   }
-  if (deltaX2<0 && deltaY2<0){
+  if (dX2<0 && dY2<0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX2<0 && deltaY2>0){
+  if (dX2<0 && dY2>0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX2>0 && deltaY2>0){
+  if (dX2>0 && dY2>0){
     adjustAngle=Math.PI/2;
   }
 
 
 
   console.log("deltaX2   " + deltaX2 + "  deltaY2   " + deltaY2)
-      dAngle=(Math.atan(deltaY2/deltaX2))+adjustAngle;
+      dAngle=(Math.atan(dY2/dX2))+adjustAngle;
+      //dAngle=dAngle*180/Math.PI;
+      if (dAngle<0){
+          console.log(dAngle);
+      dAngle=dAngle+2*Math.PI;
+      }
+
+      dAngle=dAngle-Math.PI/2;
+      //dAngle=dAngle*180/Math.PI;
+
+   activitySet=true;
+    moveInt=true;
+       dX2 =  Math.cos(dAngle)*235;;
+   dY2 = Math.sin(dAngle)*235;
+   
+  $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
+  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
+  console.log("more");
+
+    
+
+  
+
+}
+});
+manager2.on('panend', function(e) {
+    moveInt=false;
+
+    if (hypo>hypoMin){
+      // dX4 = deltaX4 + e.deltaX;
+ // dY4 = deltaY4 + e.deltaY;
+ activitySet=true;
+  $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
+  $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
+  var adjustAngle=0;
+      hypo= (Math.pow(dX2, 2))+(Math.pow(dY2, 2));
+
+
+  if (dX2>0 && dY2<0){
+    adjustAngle=Math.PI/2;
+  }
+  if (dX2<0 && dY2<0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX2<0 && dY2>0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX2>0 && dY2>0){
+    adjustAngle=Math.PI/2;
+  }
+
+
+
+  console.log("deltaX2   " + deltaX2 + "  deltaY2   " + deltaY2)
+      dAngle=(Math.atan(dY2/dX2))+adjustAngle;
       dAngle=dAngle*180/Math.PI;
       if (dAngle<0){
-
+          console.log(dAngle);
       dAngle=dAngle+360;
       }
-  console.log(dAngle);
+  console.log("Angle:" + dAngle);
 
     buttonCreate("coffee:B");
 }
-deltaX2 = deltaX2 + e.deltaX;
+ deltaX2 = deltaX2 + e.deltaX;
   deltaY2 = deltaY2 + e.deltaY;
-     $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
+$.Velocity.hook($stage2, 'translateX', dX2 + 'px');
   $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
-
 });
 
 
@@ -973,9 +1051,22 @@ manager3.add(Tap3);
 manager3.on('panmove', function(e) {
   // do something cool
 dX3 = deltaX1 + (e.deltaX);
-   dY3 = deltaY1+ (e.deltaY);
+   dY3 = deltaY1 + (e.deltaY);
+    hypo= (Math.pow(dX3, 2))+(Math.pow(dY3, 2));
+     hypo= Math.sqrt(hypo);
+console.log("hypo0:" + hypo);
     //dAngle=Math.atan(dY5/dX5)+90;
- $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
+
+      if (hypo<=hypoMin || activitySet==true && moveInt==false ){
+      console.log("if hypo less");
+        //dX4 = deltaX4 + (e.deltaX);
+   //dY4 = deltaY4 + (e.deltaY);
+    //hypo= (Math.pow(dX4, 2))+(Math.pow(dY4, 2));
+     hypo= Math.sqrt(hypo);
+
+  console.log("hypo3:" + hypo);
+  
+$.Velocity.hook($stage3, 'translateX', dX3 + 'px');
   $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
  hypo= (Math.pow(dX3, 2))+(Math.pow(dY3, 2));
  hypo2= (Math.cos(dAngle)/(hypo));
@@ -985,23 +1076,50 @@ dX3 = deltaX1 + (e.deltaX);
  console.log(hypo);
  console.log("Test"+"dX3="+ dX3 + "       dY3" +dY3);
 /*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
-   dX3 = deltaX1 + (e.deltaX);
-   dY3 = deltaY1 + (e.deltaY);
-  $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
-  $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
-  console.log("ONE"+"dX3="+ dX3 + "       dY3" +dY3);
+   dX4 = deltaX4 + (e.deltaX);
+   dY4 = deltaY4 + (e.deltaY);
+  $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
+  $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
+  console.log("ONE"+"dX4="+ dX4 + "       dY4" +dY4);
   console.log("less");
-}*/
+}
+*/
+}
+  //console.log(hypo+"   "+hypo2+"   " +hypo3)
 
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-  /*if (hypo<=hypoMax && hypo>=hypoMin){
+  if (hypo>hypoMin){
+
+  var adjustAngle=0;
+ if (dX3>0 && dY3<0){
+    adjustAngle=Math.PI/2;
+  }
+  if (dX3<0 && dY3<0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX3<0 && dY3>0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX3>0 && dY3>0){
+    adjustAngle=Math.PI/2;
+  }
 
 
 
+  console.log("deltaX1   " + deltaX1 + "  deltaY3   " + deltaY1)
+      dAngle=(Math.atan(dY3/dX3))+adjustAngle;
+      //dAngle=dAngle*180/Math.PI;
+      if (dAngle<0){
+          console.log(dAngle);
+      dAngle=dAngle+2*Math.PI;
+      }
+
+      dAngle=dAngle-Math.PI/2;
+      //dAngle=dAngle*180/Math.PI;
+
+   activitySet=true;
     moveInt=true;
-       dX3 = deltaX1 + (e.deltaX);
-   dY3 = deltaY1 + (e.deltaY);
-
+       dX3 =  Math.cos(dAngle)*235;;
+   dY3 = Math.sin(dAngle)*235;
    
   $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
   $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
@@ -1010,46 +1128,52 @@ dX3 = deltaX1 + (e.deltaX);
     
 
   
+
 }
-*/
 });
 manager3.on('panend', function(e) {
-    if (hypo<=hypoMax && hypo>=hypoMin){
-$.Velocity.hook($stage3, 'translateX', dX3 + 'px');
+    moveInt=false;
+
+    if (hypo>hypoMin){
+      // dX4 = deltaX4 + e.deltaX;
+ // dY4 = deltaY4 + e.deltaY;
+ activitySet=true;
+  $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
   $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
   var adjustAngle=0;
+      hypo= (Math.pow(dX3, 2))+(Math.pow(dY3, 2));
 
-  if (deltaX1>0 && deltaY1<0){
+
+  if (dX3>0 && dY3<0){
     adjustAngle=Math.PI/2;
   }
-  if (deltaX1<0 && deltaY1<0){
+  if (dX3<0 && dY3<0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX1<0 && deltaY1>0){
+  if (dX3<0 && dY3>0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX1>0 && deltaY1>0){
+  if (dX3>0 && dY3>0){
     adjustAngle=Math.PI/2;
   }
 
 
 
   console.log("deltaX1   " + deltaX1 + "  deltaY1   " + deltaY1)
-      dAngle=(Math.atan(deltaY1/deltaX1))+adjustAngle;
+      dAngle=(Math.atan(dY3/dX3))+adjustAngle;
       dAngle=dAngle*180/Math.PI;
       if (dAngle<0){
-
+          console.log(dAngle);
       dAngle=dAngle+360;
       }
-  console.log(dAngle);
+  console.log("Angle:" + dAngle);
 
-    buttonCreate("work:A");
+    buttonCreate("work:B");
 }
-  deltaX1 = deltaX1 + e.deltaX;
+ deltaX1 = deltaX1 + e.deltaX;
   deltaY1 = deltaY1 + e.deltaY;
-  $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
+$.Velocity.hook($stage3, 'translateX', dX3 + 'px');
   $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
-
 });
 
 //4
@@ -1299,8 +1423,21 @@ manager5.on('panmove', function(e) {
   // do something cool
 dX5 = deltaX5 + (e.deltaX);
    dY5 = deltaY5 + (e.deltaY);
+    hypo= (Math.pow(dX5, 2))+(Math.pow(dY5, 2));
+     hypo= Math.sqrt(hypo);
+console.log("hypo0:" + hypo);
     //dAngle=Math.atan(dY5/dX5)+90;
-  $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
+
+      if (hypo<=hypoMin || activitySet==true && moveInt==false ){
+      console.log("if hypo less");
+        //dX4 = deltaX4 + (e.deltaX);
+   //dY4 = deltaY4 + (e.deltaY);
+    //hypo= (Math.pow(dX4, 2))+(Math.pow(dY4, 2));
+     hypo= Math.sqrt(hypo);
+
+  console.log("hypo3:" + hypo);
+  
+$.Velocity.hook($stage5, 'translateX', dX5 + 'px');
   $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
  hypo= (Math.pow(dX5, 2))+(Math.pow(dY5, 2));
  hypo2= (Math.cos(dAngle)/(hypo));
@@ -1310,23 +1447,50 @@ dX5 = deltaX5 + (e.deltaX);
  console.log(hypo);
  console.log("Test"+"dX5="+ dX5 + "       dY5" +dY5);
 /*if (hypo< 235 && hypo2< 235 && hypo3< 235 && moveInt==false){
-   dX5 = deltaX5 + (e.deltaX);
-   dY5 = deltaY5 + (e.deltaY);
-  $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
-  $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
-  console.log("ONE"+"dX5="+ dX5 + "       dY5" +dY5);
+   dX4 = deltaX4 + (e.deltaX);
+   dY4 = deltaY4 + (e.deltaY);
+  $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
+  $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
+  console.log("ONE"+"dX4="+ dX4 + "       dY4" +dY4);
   console.log("less");
-}*/
+}
+*/
+}
+  //console.log(hypo+"   "+hypo2+"   " +hypo3)
 
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-  /*if (hypo<=hypoMax && hypo>=hypoMin){
+  if (hypo>hypoMin){
+
+  var adjustAngle=0;
+ if (dX5>0 && dY5<0){
+    adjustAngle=Math.PI/2;
+  }
+  if (dX5<0 && dY5<0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX5<0 && dY5>0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX5>0 && dY5>0){
+    adjustAngle=Math.PI/2;
+  }
 
 
 
+  console.log("deltaX5   " + deltaX5 + "  deltaY5   " + deltaY5)
+      dAngle=(Math.atan(dY5/dX5))+adjustAngle;
+      //dAngle=dAngle*180/Math.PI;
+      if (dAngle<0){
+          console.log(dAngle);
+      dAngle=dAngle+2*Math.PI;
+      }
+
+      dAngle=dAngle-Math.PI/2;
+      //dAngle=dAngle*180/Math.PI;
+
+   activitySet=true;
     moveInt=true;
-       dX5 = deltaX5 + (e.deltaX);
-   dY5 = deltaY5 + (e.deltaY);
-
+       dX5 =  Math.cos(dAngle)*235;;
+   dY5 = Math.sin(dAngle)*235;
    
   $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
   $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
@@ -1335,49 +1499,51 @@ dX5 = deltaX5 + (e.deltaX);
     
 
   
-}*/
 
+}
 });
 manager5.on('panend', function(e) {
-      if (hypo<=hypoMax && hypo>=hypoMin){
+    moveInt=false;
 
-
-    $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
+    if (hypo>hypoMin){
+      // dX4 = deltaX4 + e.deltaX;
+ // dY4 = deltaY4 + e.deltaY;
+ activitySet=true;
+  $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
   $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
   var adjustAngle=0;
-   hypo= (Math.pow(dX5, 2))+(Math.pow(dY5, 2));
+      hypo= (Math.pow(dX5, 2))+(Math.pow(dY5, 2));
 
-  if (hypo<=hypoMax && hypo>=hypoMin){
 
-  if (deltaX5>0 && deltaY5<0){
+  if (dX5>0 && dY5<0){
     adjustAngle=Math.PI/2;
   }
-  if (deltaX5<0 && deltaY5<0){
+  if (dX5<0 && dY5<0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX5<0 && deltaY5>0){
+  if (dX5<0 && dY5>0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX5>0 && deltaY5>0){
+  if (dX5>0 && dY5>0){
     adjustAngle=Math.PI/2;
   }
-}
+
 
 
   console.log("deltaX5   " + deltaX5 + "  deltaY5   " + deltaY5)
-      dAngle=(Math.atan(deltaY5/deltaX5))+adjustAngle;
+      dAngle=(Math.atan(dY5/dX5))+adjustAngle;
       dAngle=dAngle*180/Math.PI;
       if (dAngle<0){
-
+          console.log(dAngle);
       dAngle=dAngle+360;
       }
-  console.log(dAngle);
+  console.log("Angle:" + dAngle);
 
-    buttonCreate("sport:C");
+    buttonCreate("sport:B");
 }
-  deltaX5 = deltaX5 + e.deltaX;
+ deltaX5 = deltaX5 + e.deltaX;
   deltaY5 = deltaY5 + e.deltaY;
-      $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
+$.Velocity.hook($stage5, 'translateX', dX5 + 'px');
   $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
 });
 
