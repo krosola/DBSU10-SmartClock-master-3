@@ -57,9 +57,11 @@ var addStatePlus= false;
 var hypo=0;
 var activityType=0;
 var dAngle=0;
-var hypoMin=235;
+var hypoMin=165;
 var workState=false;
-var hypoMax=250;
+var hypoMax=260;
+var activitySet=false;
+
 //connect TU/e OOCSI server
 OOCSI.connect("ws://oocsi.id.tue.nl");
 
@@ -381,6 +383,7 @@ var img = document.createElement("img");
     deltaX4=activityIconX4;
       deltaY4=activityIconY4;
         console.log("dinner");
+        console.log("dX4: ")
 
         while (((Math.abs(activityIconX4-activityIconX3)  < 60) && (Math.abs(activityIconY4-activityIconY3)  < 60)) || ((Math.abs(activityIconX4-activityIconX2)  < 60) && (Math.abs(activityIconY4-activityIconY2)  < 60)) || ((Math.abs(activityIconX4-activityIconX1)<60) && (Math.abs(activityIconY4-activityIconY1)<60))){
         
@@ -474,7 +477,7 @@ function addClicked(){
      addStatePlus= !addStatePlus;
 
   if (addStatePlus==true) {
-    
+
      activitiesState = "visible";
      activities = "workIcon";
      activitiesDiv = "work";
@@ -509,6 +512,7 @@ function addClicked(){
       activitiesDiv = "dinner";
 
     displayActivityOptions(activities, activitiesDiv, activitiesState);
+      console.log("hypo2:" + (Math.pow(dX4, 2))+(Math.pow(dY4, 2)));
 
          activities = "sportIcon";
    // 
@@ -520,7 +524,6 @@ function addClicked(){
 
   if (addStatePlus == false){
     addStateInt=true;
-    if (workState==false){
            activitiesState = "hidden";
      activities = "workIcon";
      activitiesDiv = "work";
@@ -553,7 +556,7 @@ function addClicked(){
     displayActivityOptions(activities, activitiesDiv, activitiesState);
 
 }
-}
+
 /*
 $( document ).ready(function() {
 interact('.pizzaIcon')
@@ -646,6 +649,10 @@ manager1.on('panmove', function(e) {
   // do something cool
 dX1 = deltaX3 + (e.deltaX);
    dY1 = deltaY3 + (e.deltaY);
+    hypo= (Math.pow(dX1, 2))+(Math.pow(dY1, 2));
+
+     if (hypo<=hypoMax ){
+      console.log("ConditionHypoMaxMet");
     //dAngle=Math.atan(dY5/dX5)+90;
   $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
   $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
@@ -683,7 +690,7 @@ dX1 = deltaX3 + (e.deltaX);
 
   
 }*/
-
+}
 });
 manager1.on('panend', function(e) {
       if (hypo<=hypoMax && hypo>=hypoMin){
@@ -719,10 +726,10 @@ manager1.on('panend', function(e) {
 
     buttonCreate("pizza:B");
 }
- deltaX3 = deltaX3 + e.deltaX;
+ /*deltaX3 = deltaX3 + e.deltaX;
   deltaY3 = deltaY3 + e.deltaY;
       $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
-  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
+  $.Velocity.hook($stage1, 'translateY', dY1 + 'px');*/
 });
 
 
@@ -1086,7 +1093,20 @@ manager4.on('panmove', function(e) {
   // do something cool
 dX4 = deltaX4 + (e.deltaX);
    dY4 = deltaY4 + (e.deltaY);
+    hypo= (Math.pow(dX4, 2))+(Math.pow(dY4, 2));
+     hypo= Math.sqrt(hypo);
+console.log("hypo0:" + hypo);
     //dAngle=Math.atan(dY5/dX5)+90;
+
+      if (hypo<=hypoMin || activitySet==true && moveInt==false ){
+      console.log("if hypo less");
+        //dX4 = deltaX4 + (e.deltaX);
+   //dY4 = deltaY4 + (e.deltaY);
+    //hypo= (Math.pow(dX4, 2))+(Math.pow(dY4, 2));
+     hypo= Math.sqrt(hypo);
+
+  console.log("hypo3:" + hypo);
+  
 $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
   $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
  hypo= (Math.pow(dX4, 2))+(Math.pow(dY4, 2));
@@ -1105,15 +1125,42 @@ $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
   console.log("less");
 }
 */
-  console.log(hypo+"   "+hypo2+"   " +hypo3)
-  /*if (hypo<=hypoMax && hypo>=hypoMin){
+}
+  //console.log(hypo+"   "+hypo2+"   " +hypo3)
+
+  if (hypo>hypoMin){
+
+  var adjustAngle=0;
+ if (dX4>0 && dY4<0){
+    adjustAngle=Math.PI/2;
+  }
+  if (dX4<0 && dY4<0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX4<0 && dY4>0){
+    adjustAngle=-Math.PI/2;
+  }
+  if (dX4>0 && dY4>0){
+    adjustAngle=Math.PI/2;
+  }
 
 
 
+  console.log("deltaX4   " + deltaX4 + "  deltaY4   " + deltaY4)
+      dAngle=(Math.atan(dY4/dX4))+adjustAngle;
+      //dAngle=dAngle*180/Math.PI;
+      if (dAngle<0){
+          console.log(dAngle);
+      dAngle=dAngle+2*Math.PI;
+      }
+
+      dAngle=dAngle-Math.PI/2;
+      //dAngle=dAngle*180/Math.PI;
+
+   activitySet=true;
     moveInt=true;
-       dX4 = deltaX4 + (e.deltaX);
-   dY4 = deltaY4 + (e.deltaY);
-
+       dX4 =  Math.cos(dAngle)*235;;
+   dY4 = Math.sin(dAngle)*235;
    
   $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
   $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
@@ -1122,39 +1169,45 @@ $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
     
 
   
-}*/
 
+}
 });
 manager4.on('panend', function(e) {
-    if (hypo<=hypoMax && hypo>=hypoMin){
-    workState=true;
+    moveInt=false;
+
+    if (hypo>hypoMin){
+      // dX4 = deltaX4 + e.deltaX;
+ // dY4 = deltaY4 + e.deltaY;
+ activitySet=true;
   $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
   $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
   var adjustAngle=0;
+      hypo= (Math.pow(dX4, 2))+(Math.pow(dY4, 2));
 
-  if (deltaX4>0 && deltaY4<0){
+
+  if (dX4>0 && dY4<0){
     adjustAngle=Math.PI/2;
   }
-  if (deltaX4<0 && deltaY4<0){
+  if (dX4<0 && dY4<0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX4<0 && deltaY4>0){
+  if (dX4<0 && dY4>0){
     adjustAngle=-Math.PI/2;
   }
-  if (deltaX4>0 && deltaY4>0){
+  if (dX4>0 && dY4>0){
     adjustAngle=Math.PI/2;
   }
 
 
 
   console.log("deltaX4   " + deltaX4 + "  deltaY4   " + deltaY4)
-      dAngle=(Math.atan(deltaY4/deltaX4))+adjustAngle;
+      dAngle=(Math.atan(dY4/dX4))+adjustAngle;
       dAngle=dAngle*180/Math.PI;
       if (dAngle<0){
-
+          console.log(dAngle);
       dAngle=dAngle+360;
       }
-  console.log(dAngle);
+  console.log("Angle:" + dAngle);
 
     buttonCreate("dinner:B");
 }
