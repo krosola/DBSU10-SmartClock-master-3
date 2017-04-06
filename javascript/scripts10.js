@@ -50,7 +50,7 @@ var activityIconXN = 0;
       var dY3=0;
        var dX4=0;
       var dY4=0;
-       var dX5;
+       var dX5=0;
       var dY5=0;
      var moveInt=false;
 var addStatePlus= false;
@@ -265,18 +265,12 @@ var activitiesDiv;
 var activitiesState;
 
 function randomXandY() {
-   //activityRandDeg = Math.floor((Math.random() * 360) + 0);
-   //activityRandR = Math.floor((Math.random() * 80) + 80);
-   //activityRandDeg=activityRandDeg*(Math.PI/180);
-   //activityIconX = (0 + (Math.cos(activityRandDeg) * (activityRandR)));
-   //activityIconY = (0 + (Math.sin(activityRandDeg) * (activityRandR)));
-  
-     activityRandDeg = Math.floor((Math.random() * 360) + 0);
-   activityRandR = 100;
+   activityRandDeg = Math.floor((Math.random() * 360) + 0);
+   activityRandR = Math.floor((Math.random() * 80) + 80);
    activityRandDeg=activityRandDeg*(Math.PI/180);
-
    activityIconX = (0 + (Math.cos(activityRandDeg) * (activityRandR)));
    activityIconY = (0 + (Math.sin(activityRandDeg) * (activityRandR)));
+  
 }
 
 function randomXandYR(){
@@ -293,16 +287,9 @@ var img = document.createElement("img");
   var clockDiv = document.getElementById("clock");
   clockDiv.appendChild(img);
    
-   //activityRandDeg = Math.floor((Math.random() * 360) + 0);
-   //activityRandR = Math.floor((Math.random() * 80) + 80);
-   //activityRandDeg=activityRandDeg*(Math.PI/180);
-   //activityIconX = (0 + (Math.cos(activityRandDeg) * (activityRandR)));
-   //activityIconY = (0 + (Math.sin(activityRandDeg) * (activityRandR)));
-
    activityRandDeg = Math.floor((Math.random() * 360) + 0);
-   activityRandR = 100;
+   activityRandR = Math.floor((Math.random() * 80) + 80);
    activityRandDeg=activityRandDeg*(Math.PI/180);
-
    activityIconX = (0 + (Math.cos(activityRandDeg) * (activityRandR)));
    activityIconY = (0 + (Math.sin(activityRandDeg) * (activityRandR)));
   // activities.setAttribute('data-x', activityIconX);
@@ -482,9 +469,12 @@ console.log("activityOptionRun" + activities +activityIconX + "acitivyY"+ activi
 
 }
 
-function showActivities(){
 
-  activitiesState = "visible";
+function addClicked(){
+     addStatePlus= !addStatePlus;
+
+  if (addStatePlus==true) {
+activitiesState = "visible";
 
        if(checkActivity("work")){
 
@@ -542,53 +532,8 @@ function showActivities(){
     activityIconXN= 0;
 }
 
-function returnActivities(){
- if(checkActivity("work")){
-
-activitiesState = "hidden";
-
-  activities = "workIcon";
-     activitiesDiv = "work";
-
-
-    displayActivityOptions(activities, activitiesDiv, activitiesState);
-
-//$.Velocity.hook($stage3, 'translateX', 100 + 'px');
-  //$.Velocity.hook($stage3, 'translateY', 150 + 'px');
-    
-}
-
-else{ 
-  console.log("MOVEWORK");
-$.Velocity.hook($stage3, 'translateX', deltaX1 + 'px');
-  $.Velocity.hook($stage3, 'translateY', deltaY1 + 'px');
-}
-/*
-if(checkActivity("coffee")){
-
-     activities = "coffeeIcon";
-     activitiesDiv = "work";
-//console.log("deltaX4"+deltaX4+"deltaY3"+deltaY4);
-  activities.transform = "translateX(" + deltaX4 + "px) translateY(" + deltaY4 + "px)";
-
-    
-}
-
-else{
-             activitiesState = "hidden";
-
-  activities = "coffeeIcon";
-     activitiesDiv = "coffee";
-
-
-    displayActivityOptions(activities, activitiesDiv, activitiesState);
-}
-*/
-
-}
-function hideActivities(){
-
-   addStateInt=true;
+  if (addStatePlus == false){
+    addStateInt=true;
            activitiesState = "hidden";
 
            if(checkActivity("work")){
@@ -632,21 +577,8 @@ function hideActivities(){
     displayActivityOptions(activities, activitiesDiv, activitiesState);
 }
 }
-
-function addClicked(){
-  
-     addStatePlus= !addStatePlus;
-      
-
-      
-  if (addStatePlus==true) {
-      showActivities();
 }
 
-  if (addStatePlus == false){
-      hideActivities();
-}
-}
 /*
 $( document ).ready(function() {
 interact('.pizzaIcon')
@@ -733,11 +665,6 @@ manager1.add(Tap1);
 
 manager1.on('panmove', function(e) {
   // do something cool
-  for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "visible";
-  }
-
 dX1 = deltaX3 + (e.deltaX);
    dY1 = deltaY3 + (e.deltaY);
     hypo= (Math.pow(dX1, 2))+(Math.pow(dY1, 2));
@@ -820,10 +747,6 @@ $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
 }
 });
 manager1.on('panend', function(e) {
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "hidden";
-  }
     moveInt=false;
 
     if (hypo>hypoMin){
@@ -863,32 +786,10 @@ manager1.on('panend', function(e) {
     buttonCreate("pizza:B");
 
 }
-if (hypo<hypoMin){
-console.log("move to delete");
-
-  var allCookies = getAllCookies(); //store all cookies in variable
-var pizza= "pizza";
- 
-
-      Cookies.remove(pizza);
-
-
-   console.log("move to delete");
-
-  }
-    var  allCookies = getAllCookies(); //store all cookies in variable
-
-
-  //var allCookies = getAllCookies(); 
-  console.log("allcookiespiz"+allCookies);
-
-
  deltaX3= deltaX3 + e.deltaX;
   deltaY3 = deltaY3 + e.deltaY;
 $.Velocity.hook($stage1, 'translateX', dX1 + 'px');
   $.Velocity.hook($stage1, 'translateY', dY1 + 'px');
-      hideActivities();
-      addStatePlus=false;
 });
 
 
@@ -968,10 +869,6 @@ manager2.add(Tap2);
 
 manager2.on('panmove', function(e) {
   // do something cool
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "visible";
-  }
 dX2 = deltaX2 + (e.deltaX);
    dY2 = deltaY2 + (e.deltaY);
     hypo= (Math.pow(dX2, 2))+(Math.pow(dY2, 2));
@@ -1054,10 +951,6 @@ $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
 }
 });
 manager2.on('panend', function(e) {
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "hidden";
-  }
     moveInt=false;
 
     if (hypo>hypoMin){
@@ -1100,9 +993,6 @@ manager2.on('panend', function(e) {
   deltaY2 = deltaY2 + e.deltaY;
 $.Velocity.hook($stage2, 'translateX', dX2 + 'px');
   $.Velocity.hook($stage2, 'translateY', dY2 + 'px');
-         hideActivities();
-               addStatePlus=false;
-
 });
 
 
@@ -1182,10 +1072,6 @@ manager3.add(Tap3);
 
 
 manager3.on('panmove', function(e) {
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "visible";
-  }
   // do something cool
 dX3 = deltaX1 + (e.deltaX);
    dY3 = deltaY1 + (e.deltaY);
@@ -1269,10 +1155,6 @@ $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
 }
 });
 manager3.on('panend', function(e) {
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "hidden";
-  }
     moveInt=false;
 
     if (hypo>hypoMin){
@@ -1315,9 +1197,6 @@ manager3.on('panend', function(e) {
   deltaY1 = deltaY1 + e.deltaY;
 $.Velocity.hook($stage3, 'translateX', dX3 + 'px');
   $.Velocity.hook($stage3, 'translateY', dY3 + 'px');
-         hideActivities();
-               addStatePlus=false;
-
 });
 
 //4
@@ -1358,10 +1237,6 @@ manager4.add(Tap4);
 
 
 manager4.on('panmove', function(e) {
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "visible";
-  }
   // do something cool
 dX4 = deltaX4 + (e.deltaX);
    dY4 = deltaY4 + (e.deltaY);
@@ -1445,10 +1320,6 @@ $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
 }
 });
 manager4.on('panend', function(e) {
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "hidden";
-  }
     moveInt=false;
 
     if (hypo>hypoMin){
@@ -1491,9 +1362,6 @@ manager4.on('panend', function(e) {
   deltaY4 = deltaY4 + e.deltaY;
 $.Velocity.hook($stage4, 'translateX', dX4 + 'px');
   $.Velocity.hook($stage4, 'translateY', dY4 + 'px');
-         hideActivities();
-      addStatePlus=false;
-
 });
 
 
@@ -1576,10 +1444,6 @@ manager5.add(Tap5);
 
 manager5.on('panmove', function(e) {
   // do something cool
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "visible";
-  }
 dX5 = deltaX5 + (e.deltaX);
    dY5 = deltaY5 + (e.deltaY);
     hypo= (Math.pow(dX5, 2))+(Math.pow(dY5, 2));
@@ -1662,10 +1526,6 @@ $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
 }
 });
 manager5.on('panend', function(e) {
-   for (var i =0; i<60; i++){
-  var tickers = document.getElementsByClassName("graduation")[i].style;
-    tickers.visibility = "hidden";
-  }
     moveInt=false;
 
     if (hypo>hypoMin){
@@ -1708,9 +1568,6 @@ manager5.on('panend', function(e) {
   deltaY5 = deltaY5 + e.deltaY;
 $.Velocity.hook($stage5, 'translateX', dX5 + 'px');
   $.Velocity.hook($stage5, 'translateY', dY5 + 'px');
-         hideActivities();
-      addStatePlus=false;
-
 });
 
 
@@ -1840,7 +1697,7 @@ console.log("timeH   " + timeH)
     window.alert("Another activity is already planned around this time!");
     var activityReturn = name[0]+"Icon";
     console.log("acitivityReturn"+activityReturn);
-     returnActivities();
+     addClicked();
 
       
   }
@@ -1886,7 +1743,7 @@ function buttonReschedule() {
 function displayCookies() {
   var allCookies = getAllCookies(); //store all cookies in variable
 
-  console.log("allcookies"+allCookies);
+  
 
   //loop trough array containing all activities and call displayActivity
   for (var i = 0; i < allCookies.length; i++) {
@@ -1895,60 +1752,7 @@ function displayCookies() {
     var hhours = allCookies[i][1];
     var mminutes = allCookies[i][2];
     displayActivity(nname, hhours, mminutes);
-    var iconAngle=(hhours * 30 + mminutes * 0.5)-90;
-
-console.log("iconAngle"+iconAngle);
-
-iconAngle=iconAngle*(Math.PI/180);
-
-if (nname=="pizza"){
-
-  deltaX3=(0 + (Math.cos(iconAngle)) * (235));
-  deltaY3=(0 + (Math.sin(iconAngle)) * (235));
-}
-
-if (nname=="work"){
-
-  deltaX1=(0 + (Math.cos(iconAngle)) * (235));
-  deltaY1=(0 + (Math.sin(iconAngle)) * (235));
-}
-
-if (nname=="coffee"){
-
-  deltaX2=(0 + (Math.cos(iconAngle)) * (235));
-  deltaY2=(0 + (Math.sin(iconAngle)) * (235));
-}
-
-if (nname=="dinner"){
-
-  deltaX4=(0 + (Math.cos(iconAngle)) * (235));
-  deltaY4=(0 + (Math.sin(iconAngle)) * (235));
-}
-
-if (nname=="sport"){
-
-  deltaX5=(0 + (Math.cos(iconAngle)) * (235));
-  deltaY5=(0 + (Math.sin(iconAngle)) * (235));
-}
-/*for (var a = 0; a<5; a++){
-  //rotates div containing icon to the correct time, then counter rotates icon
-  var deltaXY1 = [deltaX1, deltaY1];
-  var deltaXY2 = [deltaX2, deltaY2];
-  var deltaXY3 = [deltaX3, deltaY3];
-  var deltaXY4 = [deltaX4, deltaY4];
-  var deltaXY5 = [deltaX5, deltaY5];
-
-//console.log("deltaX1:"+deltaX1);
-
-  var deltas= [deltaXY1, deltaXY2, deltaXY3, deltaXY4, deltaXY5];
-  console.log("deltas"+deltas[a][0]);
-  deltas[a][0] = (0 + (Math.cos(iconAngle)) * (235));
- // console.log(activitySetIconX);
-  deltas[a][1] = (0 + (Math.sin(iconAngle)) * (235));
-    console.log("deltas"+deltas[1][0]);
-
-  }*/
-}
+  }
 }
 
 //removes all cookies
@@ -2031,7 +1835,7 @@ function currentActivity() {
 //checks if there is a pizza activity planned
 function checkActivity(activityCheck) {
   //var array2D = [];
-  var activityNotPlanned = true;
+  var pizzaPlanned = true;
   var tempArray;
   var allCookies = getAllCookies(); //store all cookies in variable
   /*for (var key in allCookies) {
@@ -2043,7 +1847,7 @@ function checkActivity(activityCheck) {
 
   for (var i = 0; i < allCookies.length; i++) {
     if (allCookies[i][0] === activityCheck) {
-              activityNotPlanned = false;
+              pizzaPlanned = false;
 /*
       console.log();
       var t2 = parseInt(allCookies[i][1]);
@@ -2061,8 +1865,8 @@ function checkActivity(activityCheck) {
       */
     }
   }
-  console.log("pizzaPlanned:" +activityNotPlanned);
-  return activityNotPlanned;
+  console.log("pizzaPlanned:" +pizzaPlanned);
+  return pizzaPlanned;
 }
 
 

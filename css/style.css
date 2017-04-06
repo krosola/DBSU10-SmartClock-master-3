@@ -61,34 +61,34 @@ width: 60px;
 
 
 #hr-hand {
-  width: 5px;
-  height: 25%;
-  background-color: red;
-  transform-origin: 50% 80%;
+  width: 7px;
+  height: 34%;
+  background-color: black;
+  transform-origin: 50% 75%;
   position: absolute;
-  top: 30%;
+  top: 24%;
   left: 50%;
-  margin-left: -2px;
+  
 }
 
 #min-hand {
-  width: 3px;
-  height: 40%;
-  background-color: blue;
-  transform-origin: 50% 80%;
+  width: 4px;
+  height: 49%;
+  background-color: black;
+  transform-origin: 50% 77%;
   position: absolute;
-  top: 18%;
+  top: 13%;
   left: 50%;
   margin-left: 1px;
 }
 
 #sec-hand {
   width: 1px;
-  height: 50%; /*length of hand*/
-  background-color: black;
-  transform-origin: 50% 80%;
+  height: 52%; /*length of hand*/
+  background-color: red;
+  transform-origin: 50% 74%;
   position: absolute;
-  top: 10%;
+  top: 12%;
   left: 50%;
 }
 
@@ -103,7 +103,7 @@ width: 60px;
 .num div {
   width: 1em;
   line-height: 2em; /* distance numbers from clock border*/
-  color: brown;
+  color: dark grey;
   text-align: center;
   vertical-align: middle;
 }
@@ -192,7 +192,269 @@ width: 60px;
   transform: rotate(-360deg);
 }
 
+.clock .inner .graduations .graduation {
+  display: block;
+  position: absolute;
+  top: -4.7%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+    border-radius:50%;
+visibility:hidden;
+    background: gray;
+  -webkit-transform: rotate(0deg) translateX(-50%);
+          transform: rotate(0deg) translateX(-50%);
+  -webkit-transform-origin: 0 240px;
+          transform-origin: 0 240px;
+}
+.clock .inner .graduations .graduation:nth-child(5n-4) {
+  width: 8px;
+  height: 8px;
+    border-radius:50%;
+        background: black;
 
+
+}
+.clock .inner .graduations .graduation:nth-child(1) {
+  -webkit-transform: rotate(1deg) translateX(-50%);
+          transform: rotate(1deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(2) {
+  -webkit-transform: rotate(7deg) translateX(-50%);
+          transform: rotate(7deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(3) {
+  -webkit-transform: rotate(13deg) translateX(-50%);
+          transform: rotate(13deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(4) {
+  -webkit-transform: rotate(19deg) translateX(-50%);
+          transform: rotate(19deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(5) {
+  -webkit-transform: rotate(25deg) translateX(-50%);
+          transform: rotate(25deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(6) {
+  -webkit-transform: rotate(31deg) translateX(-50%);
+          transform: rotate(31deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(7) {
+  -webkit-transform: rotate(37deg) translateX(-50%);
+          transform: rotate(37deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(8) {
+  -webkit-transform: rotate(43deg) translateX(-50%);
+          transform: rotate(43deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(9) {
+  -webkit-transform: rotate(49deg) translateX(-50%);
+          transform: rotate(49deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(10) {
+  -webkit-transform: rotate(55deg) translateX(-50%);
+          transform: rotate(55deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(11) {
+  -webkit-transform: rotate(61deg) translateX(-50%);
+          transform: rotate(61deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(12) {
+  -webkit-transform: rotate(67deg) translateX(-50%);
+          transform: rotate(67deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(13) {
+  -webkit-transform: rotate(73deg) translateX(-50%);
+          transform: rotate(73deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(14) {
+  -webkit-transform: rotate(79deg) translateX(-50%);
+          transform: rotate(79deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(15) {
+  -webkit-transform: rotate(85deg) translateX(-50%);
+          transform: rotate(85deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(16) {
+  -webkit-transform: rotate(91deg) translateX(-50%);
+          transform: rotate(91deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(17) {
+  -webkit-transform: rotate(97deg) translateX(-50%);
+          transform: rotate(97deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(18) {
+  -webkit-transform: rotate(103deg) translateX(-50%);
+          transform: rotate(103deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(19) {
+  -webkit-transform: rotate(109deg) translateX(-50%);
+          transform: rotate(109deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(20) {
+  -webkit-transform: rotate(115deg) translateX(-50%);
+          transform: rotate(115deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(21) {
+  -webkit-transform: rotate(121deg) translateX(-50%);
+          transform: rotate(121deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(22) {
+  -webkit-transform: rotate(127deg) translateX(-50%);
+          transform: rotate(127deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(23) {
+  -webkit-transform: rotate(133deg) translateX(-50%);
+          transform: rotate(133deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(24) {
+  -webkit-transform: rotate(139deg) translateX(-50%);
+          transform: rotate(139deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(25) {
+  -webkit-transform: rotate(145deg) translateX(-50%);
+          transform: rotate(145deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(26) {
+  -webkit-transform: rotate(151deg) translateX(-50%);
+          transform: rotate(151deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(27) {
+  -webkit-transform: rotate(157deg) translateX(-50%);
+          transform: rotate(157deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(28) {
+  -webkit-transform: rotate(163deg) translateX(-50%);
+          transform: rotate(163deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(29) {
+  -webkit-transform: rotate(169deg) translateX(-50%);
+          transform: rotate(169deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(30) {
+  -webkit-transform: rotate(175deg) translateX(-50%);
+          transform: rotate(175deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(31) {
+  -webkit-transform: rotate(181deg) translateX(-50%);
+          transform: rotate(181deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(32) {
+  -webkit-transform: rotate(187deg) translateX(-50%);
+          transform: rotate(187deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(33) {
+  -webkit-transform: rotate(193deg) translateX(-50%);
+          transform: rotate(193deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(34) {
+  -webkit-transform: rotate(199deg) translateX(-50%);
+          transform: rotate(199deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(35) {
+  -webkit-transform: rotate(205deg) translateX(-50%);
+          transform: rotate(205deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(36) {
+  -webkit-transform: rotate(211deg) translateX(-50%);
+          transform: rotate(211deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(37) {
+  -webkit-transform: rotate(217deg) translateX(-50%);
+          transform: rotate(217deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(38) {
+  -webkit-transform: rotate(223deg) translateX(-50%);
+          transform: rotate(223deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(39) {
+  -webkit-transform: rotate(229deg) translateX(-50%);
+          transform: rotate(229deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(40) {
+  -webkit-transform: rotate(235deg) translateX(-50%);
+          transform: rotate(235deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(41) {
+  -webkit-transform: rotate(241deg) translateX(-50%);
+          transform: rotate(241deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(42) {
+  -webkit-transform: rotate(247deg) translateX(-50%);
+          transform: rotate(247deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(43) {
+  -webkit-transform: rotate(253deg) translateX(-50%);
+          transform: rotate(253deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(44) {
+  -webkit-transform: rotate(259deg) translateX(-50%);
+          transform: rotate(259deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(45) {
+  -webkit-transform: rotate(265deg) translateX(-50%);
+          transform: rotate(265deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(46) {
+  -webkit-transform: rotate(271deg) translateX(-50%);
+          transform: rotate(271deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(47) {
+  -webkit-transform: rotate(277deg) translateX(-50%);
+          transform: rotate(277deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(48) {
+  -webkit-transform: rotate(283deg) translateX(-50%);
+          transform: rotate(283deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(49) {
+  -webkit-transform: rotate(289deg) translateX(-50%);
+          transform: rotate(289deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(50) {
+  -webkit-transform: rotate(295deg) translateX(-50%);
+          transform: rotate(295deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(51) {
+  -webkit-transform: rotate(301deg) translateX(-50%);
+          transform: rotate(301deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(52) {
+  -webkit-transform: rotate(307deg) translateX(-50%);
+          transform: rotate(307deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(53) {
+  -webkit-transform: rotate(313deg) translateX(-50%);
+          transform: rotate(313deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(54) {
+  -webkit-transform: rotate(319deg) translateX(-50%);
+          transform: rotate(319deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(55) {
+  -webkit-transform: rotate(325deg) translateX(-50%);
+          transform: rotate(325deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(56) {
+  -webkit-transform: rotate(331deg) translateX(-50%);
+          transform: rotate(331deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(57) {
+  -webkit-transform: rotate(337deg) translateX(-50%);
+          transform: rotate(337deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(58) {
+  -webkit-transform: rotate(343deg) translateX(-50%);
+          transform: rotate(343deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(59) {
+  -webkit-transform: rotate(349deg) translateX(-50%);
+          transform: rotate(349deg) translateX(-50%);
+}
+.clock .inner .graduations .graduation:nth-child(60) {
+  -webkit-transform: rotate(355deg) translateX(-50%);
+          transform: rotate(355deg) translateX(-50%);
+}
 
 
 
